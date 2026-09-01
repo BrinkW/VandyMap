@@ -1,0 +1,25 @@
+# Rust
+/target/
+**/*.rs.bk
+*.pdb
+# Cargo.lock is intentionally NOT ignored: this workspace produces binaries
+# (the Dioxus app), and binaries should commit their lockfile.
+
+# Dioxus build output
+/dist/
+
+# Env / secrets
+.env
+.env.*
+
+# Local-only Claude Code guidance - single-machine dev, not shared via GitHub
+CLAUDE.md
+
+# Editor / IDE
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# OS cruft
+.DS_Store
+Thumbs.db
