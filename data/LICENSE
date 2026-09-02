@@ -1,0 +1,14 @@
+The building data in this directory is licensed under the
+Open Database License (ODbL) v1.0.
+
+Full text: https://opendatacommons.org/licenses/odbl/1-0/
+
+Portions of this data (building names, centroids, and footprint geometry)
+are derived from OpenStreetMap and are therefore a Derivative Database
+under the ODbL. Records carrying `location.source = "osm"` are OSM-derived.
+
+  (c) OpenStreetMap contributors - https://www.openstreetmap.org/copyright
+
+Note that this license applies to the DATA in this directory only. The
+VandyMap application source code is separately licensed under the MIT
+License; see the LICENSE file at the repository root.
