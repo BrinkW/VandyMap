@@ -2,6 +2,10 @@
 
 Phased so that v1 stays small and shippable, and every later phase has a clear trigger rather than being assumed. See [docs/SPEC.md](docs/SPEC.md) for what's in/out of scope for v1, and [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the migration path each stretch phase relies on.
 
+## Design gate: mockups before frontend design
+
+The site's visual design is **not** being improvised as implementation goes. Mockups will be provided before the frontend is designed for real; until then, UI built during Phase 0/1 should stay deliberately plain and functional, and no visual identity gets invented on the maintainer's behalf. Once mockups exist, they become the reference and this gate lifts.
+
 ## Phase 0 — Scaffolding
 
 - Cargo workspace set up (`app`, `campus_data`, `xtask`) per [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).

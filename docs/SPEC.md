@@ -6,22 +6,39 @@ VandyMap is an interactive, overhead map of Vanderbilt University's campus, in t
 
 The project is solo-maintained. Scope is deliberately staged so v1 is small, real, and shippable, with later phases layered on rather than assumed.
 
+## Why this exists
+
+Campus maps for Vanderbilt already exist. This project is being built because the existing ones fall short in specific, fixable ways:
+
+- **They're laggy.** Panning and zooming feels sluggish enough to be annoying in normal use.
+- **They go stale.** Information is sometimes outdated, with no obvious signal about how current any given detail is.
+- **They're missing the useful details.** Amenities and building specifics that would genuinely help someone navigating campus — what's inside a building, what's available there — simply aren't surfaced.
+
+These three complaints drive concrete decisions elsewhere in this spec, and are worth checking future work against:
+
+- Performance is a feature, not an afterthought — hence loading all data up front and doing filtering/search client-side in Rust with no server round-trips (see [ARCHITECTURE.md](ARCHITECTURE.md)).
+- Staleness is made visible rather than hidden — hence per-building `last_verified` dates surfaced in the UI, and `unknown` being a real, representable state rather than a blank.
+- Amenity depth is the point, not a nice-to-have — hence amenities as a first-class filterable facet in v1, and the floorplan phase that eventually pins individual vending machines and restrooms.
+
 ## Campus scope
 
 Which properties get data entered is a deliberate boundary, not "everything Vanderbilt owns":
 
 **In scope:**
 - Main campus core (central academic and residential buildings)
-- Peabody College
+- Peabody College and the Ingram Commons
 - Athletics facilities, including those away from the core campus
-- Highland Village housing
-- Blakemore
-- The subsidiary/newer buildings along 19th Ave and 17th Ave
+- Highland Quad
+- Blakemore House
+- School of Medicine *academic* buildings (Light Hall, Eskind Library, Learned Lab, MRB III) — university-owned, despite sitting inside the medical campus
+- A selected subset of parking garages
+- The Data Science Institute (17th and Horton)
 
 **Out of scope:**
-- **VUMC / Vanderbilt University Medical Center** — a legally separate entity from the university, with a large and complex footprint of its own.
+- **VUMC / Vanderbilt University Medical Center** — the clinical and hospital facilities are a legally separate entity from the university, with a large and complex footprint of its own.
+- Most of the subsidiary properties along 17th/18th/19th Ave and West End, child care centers, utility/infrastructure structures, and Dyer Observatory (VU-owned but ~10 miles off campus).
 
-The concrete building list to be entered is compiled from public sources and reviewed before data entry begins — see [ROADMAP.md](../ROADMAP.md) Phase 1.
+**[docs/BUILDING_LIST.md](BUILDING_LIST.md) is the authoritative, reviewed list** of the 149 buildings to be entered. [BUILDING_LIST_DEFERRED.md](BUILDING_LIST_DEFERRED.md) holds everything excluded, as a pool to pull from for future additions.
 
 ## User Stories
 
