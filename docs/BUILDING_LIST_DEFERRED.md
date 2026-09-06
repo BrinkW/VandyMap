@@ -24,7 +24,6 @@ A subset of garages is already in scope; these are the rest.
 
 ### Health, child care, and off-campus
 
-- [ ] 23B — Zerfoss Health Center — *student health, but numbered as part of the Med Ctr North complex. Residence 7 (#111) was identified during review as a student health building and is already in scope — worth confirming these aren't confused.*
 - [ ] 276 — 19th Ave Child Care
 - [ ] 277 — 18th Ave Child Care
 - [ ] 153 — Infant Care

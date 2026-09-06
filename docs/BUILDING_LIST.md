@@ -108,11 +108,10 @@ East, West, North, Memorial, and Gillette were moved here from the Peabody group
 - [ ] 295C — Kissam Center
 - [ ] 305 — Rothschild College
 - [ ] 306 — Oliver C. Carmichael College
-- [ ] 111 — Residence 7 — **not residential; it's a student health building**
 
 ### Highland Quad
 
-Demolition was announced in 2022 and paused in 2023 — confirm what's still standing before entering data.
+Demolition was announced in 2022 and paused in 2023; all of Highland Quad is confirmed still standing as of September 2026.
 
 - [ ] 45B — Morgan House
 - [ ] 45A — Lewis House
@@ -158,6 +157,7 @@ Demolition was announced in 2022 and paused in 2023 — confirm what's still sta
 - [ ] 53B — Project Safe
 - [ ] 61 — NPHC
 - [ ] 240 — Police Building
+- [ ] 23B / 111 — Zerfoss Health Center — *student health; the directory lists this building twice, as "Zerfoss Health Ctr" (#23B) and "Residence 7" (#111). One record, displayed as Zerfoss.*
 - [ ] 82 — St. Augustine Chapel
 - [ ] 89 — Baptist Collegiate Ministries
 - [ ] 254 — Schulman Center (Hillel)
