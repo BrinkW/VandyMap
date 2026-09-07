@@ -1,8 +1,9 @@
 name: CI
 
 on:
+  # Every branch, not just main: work lands on feature branches in chunks, and
+  # each chunk should be verified as it is pushed rather than only at merge.
   push:
-    branches: [main]
   pull_request:
 
 env:
