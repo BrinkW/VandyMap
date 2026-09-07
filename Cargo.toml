@@ -1,0 +1,16 @@
+[workspace]
+members = ["campus_data", "xtask"]
+resolver = "2"
+
+[workspace.package]
+edition = "2021"
+license = "MIT"
+repository = "https://github.com/BrinkW/VandyMap"
+
+[workspace.dependencies]
+campus_data = { path = "campus_data" }
+serde = { version = "1", features = ["derive"] }
+toml = "0.8"
+chrono = { version = "0.4", default-features = false, features = ["std", "serde", "clock", "wasmbind"] }
+chrono-tz = { version = "0.10", features = ["serde"] }
+thiserror = "2"

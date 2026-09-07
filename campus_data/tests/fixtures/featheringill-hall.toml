@@ -1,0 +1,30 @@
+id = "featheringill-hall"
+name = "Featheringill Hall"
+aliases = ["FEAS", "Featheringill"]
+categories = ["Academic"]
+address = "400 24th Ave S, Nashville, TN 37212"
+description = "Home to the Vanderbilt School of Engineering, housing classrooms, labs, and engineering department offices."
+departments = ["School of Engineering"]
+external_link = "https://engineering.vanderbilt.edu"
+amenities = ["Restroom", "Vending", "Printing", "StudySpace", "Outlets"]
+photos = []
+last_verified = "2026-09-02"
+
+[hours]
+kind = "Weekly"
+
+[hours.schedule]
+monday = { open = "07:00", close = "22:00" }
+tuesday = { open = "07:00", close = "22:00" }
+wednesday = { open = "07:00", close = "22:00" }
+thursday = { open = "07:00", close = "22:00" }
+friday = { open = "07:00", close = "20:00" }
+saturday = { open = "09:00", close = "18:00" }
+sunday = { open = "09:00", close = "18:00" }
+
+[location]
+centroid = { lat = 36.1447, lon = -86.8027 }
+footprint = []
+source = "osm"
+
+floors = []

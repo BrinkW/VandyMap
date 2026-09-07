@@ -58,10 +58,13 @@ enum Amenity {
 Modeled as an enum rather than a bool plus an optional schedule, so that "unknown" is a real, representable state. This matters: most buildings start life with unknown hours during data entry, and an unknown building must never be silently treated as closed.
 
 ```rust
+// Serialized with an internal tag, so a TOML file writes `kind = "Weekly"`
+// alongside a `[hours.schedule]` table (see the example below).
+#[serde(tag = "kind")]
 enum Hours {
-    Unknown,                 // no data yet - excluded from "open now" results
-    AlwaysOpen,              // 24/7 or effectively always accessible
-    Weekly(WeeklySchedule),
+    Unknown,                            // no data yet - excluded from "open now" results
+    AlwaysOpen,                         // 24/7 or effectively always accessible
+    Weekly { schedule: WeeklySchedule },
 }
 
 struct WeeklySchedule {
@@ -115,7 +118,8 @@ struct Floor {
 
 struct FloorFacility {
     kind: Amenity,
-    position: (f64, f64),      // coordinates within the floorplan image, not lat/lon
+    x: f64,                    // coordinates within the floorplan image, not lat/lon
+    y: f64,
     note: Option<String>,
 }
 ```
@@ -188,9 +192,10 @@ A checker (`xtask validate-data`, see [ARCHITECTURE.md](ARCHITECTURE.md)) runs o
 - File parses as valid TOML matching the `Building` schema (via `serde`).
 - `id` matches the filename (minus extension), and is unique across all files.
 - `categories` is non-empty.
-- `centroid` is within a plausible bounding box around Vanderbilt's campus (catches obvious lat/lon mistakes).
-- Times parse as `HH:MM` in 24-hour form, and `open` is earlier than `close` within a day. (Past-midnight closing times are not representable in v1 — flagged as an error, not silently accepted.)
-- `footprint`, if non-empty, has at least 3 points and is closed or closable (first/last point handling defined in `campus_data`).
+- `name` is not empty.
+- `centroid` is within a plausible bounding box around Vanderbilt's campus (catches obvious lat/lon mistakes). The bounds are `CAMPUS_BOUNDS` in `campus_data::validate`.
+- Times parse as `HH:MM` in 24-hour form (enforced at deserialization, so `"25:00"` fails at load), and `open` is earlier than `close` within a day. (Past-midnight closing times are not representable in v1 — flagged as an error, not silently accepted.)
+- `footprint`, if non-empty, has at least 3 points, each within the campus bounds.
 - `last_verified`, if present, parses as a date and is not in the future.
 
 This keeps bad data from silently shipping, which matters more than usual here since there's no second reviewer on a solo project.
