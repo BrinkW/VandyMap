@@ -51,36 +51,51 @@ v1's data is manually curated by a single maintainer, there are no accounts, and
 
 A Cargo workspace, so the data model can be shared and validated independently of the UI:
 
+Items marked *(planned)* do not exist yet; everything else is current as of Phase 0 Chunk 2.
+
 ```
 vandymap/
-├── Cargo.toml                  # workspace root
-├── LICENSE                     # MIT
-├── app/                        # Dioxus web app
-│   ├── src/
-│   │   ├── main.rs
-│   │   ├── components/         # map view, info panel, filter bar, search
-│   │   ├── state.rs            # app state: loaded buildings, active filters/search
-│   │   ├── url_state.rs        # deep-link parsing/serialization (?building=...)
-│   │   └── maplibre_interop.rs # JS-eval bindings into the MapLibre shim
-│   └── assets/
-│       ├── maplibre_shim.js    # the thin JS adapter described above
-│       └── styles.css          # hand-written CSS
-├── campus_data/                # shared crate: schema + loading + validation
+├── Cargo.toml                  # workspace root; default-members excludes `app`
+├── Dioxus.toml                 # app name, page title, web CDN resources
+├── rust-toolchain.toml         # pinned toolchain + wasm32 target + components
+├── rustfmt.toml
+├── LICENSE                     # MIT (code)
+├── .github/workflows/
+│   └── ci.yml                  # fmt, clippy (host + wasm32), test, validate-data
+├── app/                        # Dioxus web app (wasm32)
+│   ├── Cargo.toml
 │   └── src/
-│       ├── lib.rs
-│       ├── building.rs         # Building struct, Category/Amenity enums, Hours
-│       ├── hours.rs            # "open now" evaluation in America/Chicago
-│       └── validate.rs         # schema/consistency checks over data/buildings/*.toml
-├── xtask/                      # dev tooling: validate-data, import-osm
+│       ├── main.rs
+│       ├── components/         # (planned) map view, info panel, filter bar, search
+│       ├── state.rs            # (planned) loaded buildings, active filters/search
+│       ├── url_state.rs        # (planned) deep-link parsing (?building=...)
+│       └── maplibre_interop.rs # (planned) JS-eval bindings into the MapLibre shim
+│   └── assets/                 # (planned) maplibre_shim.js, styles.css
+├── campus_data/                # shared crate: schema + loading + validation
+│   ├── src/
+│   │   ├── lib.rs
+│   │   ├── building.rs         # Building, Category/Amenity, LatLon, Location
+│   │   ├── hours.rs            # Hours enum + "open now" in America/Chicago
+│   │   ├── load.rs             # reading data/buildings/*.toml (native tooling)
+│   │   └── validate.rs         # schema/consistency checks
+│   └── tests/
+│       ├── parsing.rs          # proves DATA_MODEL.md's example actually parses
+│       └── fixtures/*.toml
+├── xtask/                      # dev tooling: validate-data; import-osm (planned)
 ├── data/
+│   ├── LICENSE                 # ODbL (data)
 │   └── buildings/
 │       └── *.toml              # one file per building — see docs/DATA_MODEL.md
 ├── docs/
 │   ├── SPEC.md
 │   ├── ARCHITECTURE.md
-│   └── DATA_MODEL.md
+│   ├── DATA_MODEL.md
+│   ├── BUILDING_LIST.md
+│   └── BUILDING_LIST_DEFERRED.md
 └── ROADMAP.md
 ```
+
+**`app` is excluded from workspace `default-members`.** The Dioxus web renderer targets wasm32, so building it for the host during a plain `cargo test`/`cargo clippy` is slow and beside the point. Those commands stay scoped to the portable crates, and CI checks the app against wasm32 explicitly. The side effect worth knowing: `dx` commands must pass `-p app`, or dx picks `xtask` (the only remaining default binary) and bundles the wrong crate.
 
 > Keep this tree current — update it in the same change that adds, removes, or relocates a crate, module, or top-level directory.
 

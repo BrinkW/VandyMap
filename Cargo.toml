@@ -1,5 +1,10 @@
 [workspace]
-members = ["campus_data", "xtask"]
+members = ["app", "campus_data", "xtask"]
+# `app` targets wasm32 via the Dioxus web renderer, so building it for the host
+# during a plain `cargo test`/`cargo clippy` is slow at best and confusing at
+# worst. Those commands stay scoped to the portable crates; CI checks the app
+# explicitly against wasm32 instead (see .github/workflows/ci.yml).
+default-members = ["campus_data", "xtask"]
 resolver = "2"
 
 [workspace.package]

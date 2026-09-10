@@ -31,6 +31,12 @@ jobs:
       - name: Clippy
         run: cargo clippy --all-targets --all-features -- -D warnings
 
+      # The app is excluded from workspace default-members because the Dioxus
+      # web renderer targets wasm32, so the steps above skip it. Check it
+      # against the target it actually ships to.
+      - name: Clippy (app, wasm32)
+        run: cargo clippy -p app --target wasm32-unknown-unknown -- -D warnings
+
       - name: Test
         run: cargo test --all-features
 

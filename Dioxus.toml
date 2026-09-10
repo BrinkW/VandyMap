@@ -1,0 +1,22 @@
+[application]
+name = "vandymap"
+
+# NOTE: build and serve commands must pass `-p app` explicitly.
+# The workspace sets `default-members` to the portable crates (so a plain
+# `cargo test` does not try to build the wasm app for the host), which leaves
+# `xtask` as the only default binary — without `-p app`, dx bundles that
+# instead. Passing the package explicitly is unambiguous either way.
+
+[web.app]
+title = "VandyMap"
+
+# MapLibre GL JS and its stylesheet get declared here in Chunk 4, rather than
+# hand-maintaining an index.html. Empty until then.
+[web.resource]
+style = []
+script = []
+
+# Dev-server-only resources. Required by the schema even when empty.
+[web.resource.dev]
+style = []
+script = []
